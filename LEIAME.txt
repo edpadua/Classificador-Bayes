@@ -1,0 +1,18 @@
+Nome(s): Eduardo de Pádua 61052, Dirlene Lopes 63798
+Taxa de acerto (treino): 100%
+Tempo total: 701.64 segundos.
+Breve descrição da estratégia adotada:
+
+Geração dos atributos
+
+	Para o pré-processamento, utilizar a função detrend em cada sinal das imagens e em seguida tirar uma máscara somente dos pontos pertencentes ao cérebro, resultando em uma matriz ( amostras X atributos ).  Para obter os atributos, entrar com a matriz na função pcaPmtk ( análise dos componentes principais ) do pacote Pmtk3, fazendo o número de atributos ser 60 e, utilizar a saída Z. A última parte desta etapa é arredondar os valores de Z para discretizá-los e,  em seguida deixar todos positivos. A saída é a variável M_atributos
+
+
+Classificação
+
+	
+       Inicialmente é criada uma estrutura de dados para a rede bayesiana, composta de quatro tabelas por cada atributo, uma para cada classe e, os valores são armazenados a partir do onset_train.m. Com a função prob( valor, classe ) é possível obter a probabilidade de um dado valor de atributo pertencer a uma classe, isso é feito pela razão entre contagem do número de vezes que este valor se apresenta e a quantidade de elementos na tabela.  A partir dela calcula-se o produtório p( x1| c ) x p( x2| c ) x ... x p( xn| c ) = p( x1, x2, ..., xn | c ) e,  a classe c cuja a probabilidade é a maior em uma amostra é  retornada na saída. Neste caso, o processo é realizado com os dados de treinamento e com os dados de teste, resultando em dois vetores contendo as saídas previstas.
+
+
+a) Tipo de seleção : Pmtk 
+b) Tipo de implementação do classificador: Naive Bayes
